@@ -1,0 +1,39 @@
+html { 
+  background: url('../images/grudge.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /*background-blend-mode: overlay;*/
+}
+
+.container {
+  padding-top : 50px;
+}
+
+.padding {
+  height : 30px;
+}
+
+body {
+  background-color : transparent;
+}
+h1 {
+  font-family: 'Nosifer', cursive;
+  color : #830303;
+}
+
+h2 {
+  font-family: 'Sedgwick Ave Display', cursive;
+  color : #830303;
+}
+
+h3 {
+  font-family: 'VT323', monospace;
+  color : #ffffff;
+}
+
+
+/*div {
+  border : 1px solid white;
+}*/
