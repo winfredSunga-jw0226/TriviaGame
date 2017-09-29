@@ -232,9 +232,9 @@ function evaluateAnswer() {
     triviaQuiz.correctAnswersCount++;
     showCorrectGif();
     timeOutId = setTimeout(removeAllTexts, 2000);
-    timeOutId = setTimeout(showTransitionGif, 2500);
+    timeOutId = setTimeout(showTransitionGif, 2500,triviaQuiz.counter);
     timeOutId = setTimeout(removeAllTexts, 5000);
-    timeOutId = setTimeout(triviaQuiz.counter++,5000);
+    timeOutId = setTimeout(triviaQuiz.counter++,5000); //5000
 
     if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
       timeOutId  = setTimeout(startQuiz, 5500);
@@ -246,9 +246,10 @@ function evaluateAnswer() {
     triviaQuiz.wrongAnswersCount++;
     showWrongGif();
     timeOutId = setTimeout(removeAllTexts, 3500);
-    timeOutId = setTimeout(showTransitionGif, 4000);
+    //timeOutId = setTimeout(showTransitionGif, 4000);
+    timeOutId = setTimeout(showTransitionGif, 4000,triviaQuiz.counter);
     timeOutId = setTimeout(removeAllTexts, 6500);
-    timeOutId = setTimeout(triviaQuiz.counter++,6500);
+    timeOutId = setTimeout(triviaQuiz.counter++,20000); //6500
 
     if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
       timeOutId  = setTimeout(startQuiz, 7000);
@@ -259,9 +260,10 @@ function evaluateAnswer() {
     triviaQuiz.skippedQuestionsCount++;
     showTimeIsOutGif();
     timeOutId = setTimeout(removeAllTexts, 2500);
-    timeOutId = setTimeout(showTransitionGif, 3000);
+    //timeOutId = setTimeout(showTransitionGif, 3000);
+    timeOutId = setTimeout(showTransitionGif, 3000,triviaQuiz.counter);
     timeOutId = setTimeout(removeAllTexts, 5500);
-    timeOutId = setTimeout(triviaQuiz.counter++,5500);
+    timeOutId = setTimeout(triviaQuiz.counter++,20000); //5500
 
     if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
       timeOutId  = setTimeout(startQuiz, 6000);
@@ -278,10 +280,11 @@ function showResult() {
   $("#div-choice-3").html("<h3 class='text-center'>Skipped Questions : " + triviaQuiz.skippedQuestionsCount + "</h3>");
 }
 
-function showTransitionGif() {
+function showTransitionGif(index) {
   //triviaQuiz.updateCurrentTransitionGif()
   //triviaQuiz.currentgifTransition = triviaQuiz.quizzes[triviaQuiz.counter].transitionGif;
-  $("#padding-2").html("<img src='" + triviaQuiz.quizzes[triviaQuiz.counter].transitionGif + "' alt='gif from the movie'>");
+  //$("#padding-2").html("<img src='" + triviaQuiz.quizzes[triviaQuiz.counter].transitionGif + "' alt='gif from the movie'>");
+  $("#padding-2").html("<img src='" + triviaQuiz.quizzes[index].transitionGif + "' alt='gif from the movie'>");
 }
 
 function showWrongGif() {
