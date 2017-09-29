@@ -11,9 +11,9 @@ html {
   padding-top : 50px;
 }
 
-.padding {
+/*.padding {
   height : 30px;
-}
+}*/
 
 body {
   background-color : transparent;
@@ -33,7 +33,23 @@ h3 {
   color : #ffffff;
 }
 
-
 /*div {
   border : 1px solid white;
 }*/
+
+#start-button {
+  width : 160px;
+  display : block;
+  margin : 0px auto;
+}
+
+#div-choice-1 > h3:hover, #div-choice-2 > h3:hover, #div-choice-3 > h3:hover, #div-choice-4 > h3:hover  {
+  background-color: #e3e1e9; 
+  display: block;
+  color : red;
+}
+
+img {
+  display : block;
+  margin : 0px auto;
+}
