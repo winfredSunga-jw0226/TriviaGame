@@ -83,35 +83,35 @@
       transitionGif : "assets/images/jason.gif",
     },
     {
-      question : "The Grudge is a 2004 American supernatural horror film and a remake of a film from this foreign country"  
+      question : "The Grudge is a 2004 American supernatural horror film and a remake of a film from this foreign country" ,
       choices : ["Korea", "France", "Thailand", "Japan"] ,
       answer : "Japan",
       transitionGif : "assets/images/grudge.gif",
     },
 
     {
-      question : "Who directed Saw?"  
+      question : "Who directed Saw?",
       choices : ["Robert Rodriguez", "Eli Roth", "James Wan", "Quentin Tarantino"] ,
       answer : "James Wan",
       transitionGif : "assets/images/saw.gif",
     },
 
     {
-      question : "Pinhead is a(n)?"  
+      question : "Pinhead is a(n)?",
       choices : ["Pin cushion", "Alien", "Cenobite", "Boy Band"] ,
       answer : "Cenobite",
       transitionGif : "assets/images/pinhead.gif",
     },
 
     {
-      question : "If you are a teenager living on Elm Street what should you never do?"  
+      question : "If you are a teenager living on Elm Street what should you never do?" ,
       choices : ["Play with dolls", "Go to sleep", "Have sex", "Smoke marijuana"] ,
       answer : "Go to sleep",
       transitionGif : "assets/images/sleep.gif",
     },
 
     {
-      question : "What was the name that the demon from 'The Exorcist' used to contact Regan?"  
+      question : "What was the name that the demon from 'The Exorcist' used to contact Regan?", 
       choices : ["Captain Spaulding", "Captain Jack", "Captain Howdy", "Captain Holy"] ,
       answer : "Captain Howdy",
       transitionGif : "assets/images/spiderWalk.gif",
