@@ -43,17 +43,14 @@
 
  var triviaQuiz = {
   counter : 0 ,
-  intervalDurationForQuestions : 3000, //in milliseconds
-  timeOutForResultGif : 1000, //in milliseconds
-  timeOutForTransitionGif : 2500, //in milliseconds
-  timeOutForNextTrivia : 5000, //in milliseconds
+  intervalDurationForQuestions : 10000, //in milliseconds
   gifCorrect : "assets/images/correct.gif",
   gifWrong :  "assets/images/wrong.gif",
   gifTimeIsUp : "assets/images/timeUp.gif",
   currentQuestion : "",
   currentMultipleChoices : "",
   currentAnswer : "",
-  currentgifTransition : "",
+  currentgifTransition : "assets/images/spiderWalk.gif",
   quizzes : [ 
     {
       question : "Which character was possessed by the demon in the 1973 movie The Exorcist?",
@@ -84,10 +81,46 @@
       choices : ["Scream", "Halloween", "The Ring", "Friday the 13th"] ,
       answer : "Friday the 13th",
       transitionGif : "assets/images/jason.gif",
-    }
+    },
+    {
+      question : "The Grudge is a 2004 American supernatural horror film and a remake of a film from this foreign country"  
+      choices : ["Korea", "France", "Thailand", "Japan"] ,
+      answer : "Japan",
+      transitionGif : "assets/images/grudge.gif",
+    },
+
+    {
+      question : "Who directed Saw?"  
+      choices : ["Robert Rodriguez", "Eli Roth", "James Wan", "Quentin Tarantino"] ,
+      answer : "James Wan",
+      transitionGif : "assets/images/saw.gif",
+    },
+
+    {
+      question : "Pinhead is a(n)?"  
+      choices : ["Pin cushion", "Alien", "Cenobite", "Boy Band"] ,
+      answer : "Cenobite",
+      transitionGif : "assets/images/pinhead.gif",
+    },
+
+    {
+      question : "If you are a teenager living on Elm Street what should you never do?"  
+      choices : ["Play with dolls", "Go to sleep", "Have sex", "Smoke marijuana"] ,
+      answer : "Go to sleep",
+      transitionGif : "assets/images/sleep.gif",
+    },
+
+    {
+      question : "What was the name that the demon from 'The Exorcist' used to contact Regan?"  
+      choices : ["Captain Spaulding", "Captain Jack", "Captain Howdy", "Captain Holy"] ,
+      answer : "Captain Howdy",
+      transitionGif : "assets/images/spiderWalk.gif",
+    },
+
   ], 
   correctAnswersCount : 0,
   wrongAnswersCount : 0,
+  skippedQuestionsCount : 0,
   updateCurrentQuestion : function() {
     this.currentQuestion = this.quizzes[this.counter].question;    
   },
@@ -104,18 +137,13 @@
 
  var timeRemaining; 
  var timeOutId;
+ var timeOutId2;
  var intervalId;
-
- //create a function to display the timer every second
- //funtion to start the quiz
- //function to stop the quiz
-
  
  //create a function to display the question
 function getQuestion() {
   //first update the appropriate variable in the object
   triviaQuiz.updateCurrentQuestion();
-  //triviaQuiz.currentQuestion = triviaQuiz.quizzes[triviaQuiz.counter].question;    
 
   return triviaQuiz.currentQuestion;
 }
@@ -123,8 +151,7 @@ function getQuestion() {
  //create a function to display the multiple choices
 function getMultipleChoices() {
   triviaQuiz.updateCurrentMultipleChoices();
-  //triviaQuiz.currentMultipleChoices = triviaQuiz.quizzes[triviaQuiz.counter].choices;
-
+ 
   return triviaQuiz.currentMultipleChoices;
 }
 
@@ -134,18 +161,12 @@ function countdown() {
   //decrement the time remaining by 1 second after each call to this function
   timeRemaining--;
 
-  //increment the counter by 1 
-  //triviaQuiz.counter++;
-    $("#timer").text("Time Remaining : " + timeRemaining + " seconds");
-  
+  $("#timer").text("Time Remaining : " + timeRemaining + " seconds");
+
   //we want to stop the countdown and quiz once we reach 0 seconds
   if(timeRemaining === 0) {
-    //stopQuiz();
-    //showTimeIsOutGif();
     evaluateAnswer();
-    //timeOutId = setTimeout(showTransitionGif, 2500);
-    //timeOutId = setTimeout(showTransitionGif, triviaQuiz.timeOutForTransitionGif);
-  }
+  }  
 }
 
 function startQuiz() {
@@ -173,7 +194,6 @@ function startQuiz() {
 
   //display time left every 1 sev
   intervalId = setInterval(countdown, 1000);
-  
 }
 
 function stopQuiz() {
@@ -189,6 +209,7 @@ function removeAllTexts() {
   $("#choice_2").empty();
   $("#choice_3").empty();
   $("#choice_4").empty();
+  $("#padding-2").empty();
 }
 
 function evaluateAnswer() {
@@ -197,46 +218,70 @@ function evaluateAnswer() {
   var answer = $(this).text();
   var correctAnswer = "<> " + triviaQuiz.currentAnswer;
 
-  console.log("this is : " + $(this));
-  console.log("answer : " + answer);
-  console.log("correct answer : " + correctAnswer);
-  console.log("type of answer : " + typeof(answer));
+  // console.log("this is : " + $(this));
+  // console.log("answer : " + answer);
+  // console.log("correct answer : " + correctAnswer);
+  // console.log("type of answer : " + typeof(answer));
+  console.log()
 
   removeAllTexts();
 
-  if(answer === correctAnswer) {
-    showCorrectGif();
-    //$("#padding-2").html("<img src='" + triviaQuiz.gifCorrect + "' alt='answer is correct'>");
-    triviaQuiz.correctAnswersCount++;
-    timeOutId = setTimeout(showTransitionGif, 2000);
-  } else if (answer !== correctAnswer && answer !== "") {
-    showWrongGif();
-    triviaQuiz.wrongAnswersCount++;
-    timeOutId = setTimeout(showTransitionGif, 3500);
-  } else {
-    showTimeIsOutGif();
-    triviaQuiz.wrongAnswersCount++;
-    timeOutId = setTimeout(showTransitionGif, 2000);
-  }
+  console.log("transition img : " + triviaQuiz.currentgifTransition);
 
-/*
-  else if(typeof($(this)) === "object") {
-    showTimeIsOutGif();
+  if(answer === correctAnswer) {
+    triviaQuiz.correctAnswersCount++;
+    showCorrectGif();
+    timeOutId = setTimeout(removeAllTexts, 2000);
+    timeOutId = setTimeout(showTransitionGif, 2500);
+    timeOutId = setTimeout(removeAllTexts, 5000);
+    timeOutId = setTimeout(triviaQuiz.counter++,5000);
+
+    if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
+      timeOutId  = setTimeout(startQuiz, 5500);
+    } else {
+      timeOutId = setTimeout(showResult, 5500);
+    }
+
+  } else if (answer !== correctAnswer && answer !== "") {
     triviaQuiz.wrongAnswersCount++;
-    timeOutId = setTimeout(showTransitionGif, 2000);
-  } else {
     showWrongGif();
-    //$("#padding-2").html("<img src='" + triviaQuiz.gifWrong + "' alt='answer is wrong'>");
-    //$("#padding-2").append("<h3>Correct Answer : " + triviaQuiz.currentAnswer + "</h3>");
-    triviaQuiz.wrongAnswersCount++;
-    timeOutId = setTimeout(showTransitionGif, 3500);
+    timeOutId = setTimeout(removeAllTexts, 3500);
+    timeOutId = setTimeout(showTransitionGif, 4000);
+    timeOutId = setTimeout(removeAllTexts, 6500);
+    timeOutId = setTimeout(triviaQuiz.counter++,6500);
+
+    if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
+      timeOutId  = setTimeout(startQuiz, 7000);
+    } else {
+      timeOutId = setTimeout(showResult, 7000);
+    }
+  } else {
+    triviaQuiz.skippedQuestionsCount++;
+    showTimeIsOutGif();
+    timeOutId = setTimeout(removeAllTexts, 2500);
+    timeOutId = setTimeout(showTransitionGif, 3000);
+    timeOutId = setTimeout(removeAllTexts, 5500);
+    timeOutId = setTimeout(triviaQuiz.counter++,5500);
+
+    if (triviaQuiz.counter < triviaQuiz.quizzes.length) {
+      timeOutId  = setTimeout(startQuiz, 6000);
+    } else {
+      timeOutId = setTimeout(showResult, 6000);
+    }
   }
-*/  
+}
+
+function showResult() {
+  $("#padding-2").html("<h3 class='text-center'>Here are the results</h3>");
+  $("#div-choice-1").html("<h3 class='text-center'>Correct Answers : " + triviaQuiz.correctAnswersCount + "</h3>");
+  $("#div-choice-2").html("<h3 class='text-center'>Wrong Answers : " + triviaQuiz.wrongAnswersCount + "</h3>");
+  $("#div-choice-3").html("<h3 class='text-center'>Skipped Questions : " + triviaQuiz.skippedQuestionsCount + "</h3>");
 }
 
 function showTransitionGif() {
-  triviaQuiz.updateCurrentTransitionGif()
-  $("#padding-2").html("<img src='" + triviaQuiz.currentgifTransition + "' alt='gif from the movie'>");
+  //triviaQuiz.updateCurrentTransitionGif()
+  //triviaQuiz.currentgifTransition = triviaQuiz.quizzes[triviaQuiz.counter].transitionGif;
+  $("#padding-2").html("<img src='" + triviaQuiz.quizzes[triviaQuiz.counter].transitionGif + "' alt='gif from the movie'>");
 }
 
 function showWrongGif() {
@@ -261,9 +306,6 @@ $("#choice_2").on("click", evaluateAnswer);
 $("#choice_3").on("click", evaluateAnswer);
 $("#choice_4").on("click", evaluateAnswer);
 
-// $("#choice_2").on("click", function(event){
-
-// });
 
 
 
