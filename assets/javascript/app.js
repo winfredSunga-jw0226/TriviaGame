@@ -43,7 +43,7 @@
 
  var triviaQuiz = {
   counter : 0 ,
-  intervalDurationForQuestions : 10000, //in milliseconds
+  intervalDurationForQuestions : 20000, //in milliseconds
   gifCorrect : "assets/images/correct.gif",
   gifWrong :  "assets/images/wrong.gif",
   gifTimeIsUp : "assets/images/timeUp.gif",
